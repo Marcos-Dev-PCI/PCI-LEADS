@@ -198,6 +198,8 @@ PCI-LEADS/
 │   ├── package.json
 │   ├── vite.config.ts
 │   └── Dockerfile
+├── scripts/
+│   └── criar_issues.py         # Cria as issues do projeto no GitHub
 ├── docker-compose.yml
 ├── .env.example                # Modelo das variáveis de ambiente
 └── README.md
@@ -390,6 +392,18 @@ O sistema armazena dados de empresas **e de pessoas** (nomes de sócios, telefon
 
 ## Como contribuir
 
+### Tarefas
+
+Todas as tarefas estão nas [Issues](../../issues) do repositório, organizadas por fase (*milestones*) e com responsável, revisor e dependências. Comece pela issue fixada **"Leia primeiro: como vamos trabalhar juntos"**.
+
+Filtros úteis:
+
+- Minhas tarefas: etiqueta `dono: marcos` ou `dono: pedro`
+- Fazer juntos: etiqueta `dupla`
+- O que bloqueia outras tarefas: etiqueta `prioridade: alta`
+
+As issues foram criadas pelo script [`scripts/criar_issues.py`](scripts/criar_issues.py), que pode ser rodado de novo sem duplicar nada.
+
 ### Branches
 
 | Branch | Uso |
@@ -427,8 +441,10 @@ Projeto interno desenvolvido pela **PCI — Projetos e Consultoria Integrada**.
 
 | Nome | Função |
 |---|---|
-| Pedro Esmeraldo | Desenvolvimento |
-| *(seu nome)* | Desenvolvimento |
+| Marcos André | Desenvolvimento full-stack |
+| Pedro Esmeraldo | Desenvolvimento full-stack |
+
+O trabalho é dividido **por funcionalidade**: cada um é dono de funcionalidades completas (banco + API + tela) e revisa os PRs do outro. As decisões que afetam o projeto inteiro (modelo de dados e critérios do score) são feitas em dupla.
 
 ---
 
