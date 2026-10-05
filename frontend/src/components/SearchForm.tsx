@@ -1,4 +1,6 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
+
 
 interface SearchFormProps {
   onSearch: (query: string, city: string) => void;
