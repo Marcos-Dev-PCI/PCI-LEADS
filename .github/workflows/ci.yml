@@ -1,0 +1,36 @@
+name: Continuous Integration
+
+# Aqui dizemos quando o robô deve trabalhar
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Copia o código do repositório para a máquina do robô
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # 2. Cria o arquivo .env temporário para o Docker não dar erro de variável
+    - name: Create .env file
+      run: |
+        echo "POSTGRES_DB=pcleads" >> .env
+        echo "POSTGRES_USER=pcleads" >> .env
+        echo "POSTGRES_PASSWORD=change-me" >> .env
+        echo "DB_HOST=database" >> .env
+        echo "DB_PORT=5432" >> .env
+        echo "DJANGO_DEBUG=True" >> .env
+        echo "DJANGO_SECRET_KEY=change-me" >> .env
+
+    # 3. Liga os containers usando o Docker Compose na nuvem
+    - name: Start containers
+      run: docker compose up -d
+
+    # 4. O teste crucial: roda o comando de build que foi concertado
+    - name: Run Frontend Build
+      run: docker compose exec -T frontend npm run build

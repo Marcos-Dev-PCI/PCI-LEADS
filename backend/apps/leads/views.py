@@ -6,6 +6,8 @@ from .models import Lead
 from .serializers import LeadSerializer
 from .services import search_leads
 
+from rest_framework.permissions import IsAuthenticated # Linha adicionada
+
 class LeadListCreateView(generics.ListCreateAPIView):
     queryset = Lead.objects.all()
     serializer_class = LeadSerializer
@@ -24,4 +26,20 @@ class LeadSearchView(APIView):
             "query": query,
             "city": city,
             "results": results,
+        })
+
+class UserMeView(APIView):
+    # Esta linha obriga o robô do DRF a verificar se quem bateu na porta está autenticado.
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Quando o usuário passa um token válido, o Django automaticamente descobre
+        # quem ele é e joga os dados dele dentro da variável 'request.user'
+        user = request.user
+        
+        # Devolvemos os dados mastigados em formato de texto estruturado (JSON) para o React
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
         })
