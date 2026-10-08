@@ -413,9 +413,11 @@ As issues foram criadas pelo script [`scripts/criar_issues.py`](scripts/criar_is
 | Branch | Uso |
 |---|---|
 | `main` | Versão estável |
-| `develop` | Integração das funcionalidades em andamento |
+| `develop` | **Branch padrão.** Integração das funcionalidades em andamento |
 | `feature/<nome>` | Nova funcionalidade (ex.: `feature/importacao-csv`) |
 | `fix/<nome>` | Correção de bug (ex.: `fix/build-frontend`) |
+
+`main` e `develop` são protegidas: não aceitam push direto, e todo merge precisa de um Pull Request com 1 aprovação do outro desenvolvedor.
 
 ### Fluxo de trabalho
 
