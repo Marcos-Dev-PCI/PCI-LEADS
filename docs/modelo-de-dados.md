@@ -444,11 +444,11 @@ export interface Paginado<T> {
 
 Os campos decimais (`capital_social`, `latitude`, `distancia_km` etc.) chegam como **texto**, porque é assim que o Django REST Framework envia `DecimalField` por padrão.
 
-## Decisões para fechar em dupla
+## Decisões fechadas
 
-- [ ] Dois apps (`empresas` e `leads`) ou tudo em `leads`?
-- [ ] Um lead por empresa (`OneToOne`) está bom? Ou a mesma empresa pode voltar a ser prospectada depois de "perdido" como um lead novo?
-- [ ] Os nomes dos status do funil estão bons?
-- [ ] Guardar só o CNPJ completo (14 dígitos) ou separar matriz e filiais?
-- [ ] O modelo `Lead` atual (com `name`, `company`, `email`...) será **substituído**. Como ainda não há dados reais, podemos apagar a tabela antiga e começar as migrações do zero?
-- [ ] Algum campo faltando para a Redrive? Revisar quando a #7 (demonstração da Redrive) for concluída.
+- [x] **Dois apps** (`empresas` e `leads`): sim. Cada um trabalha no seu app (#10 e #11) sem conflito.
+- [x] **Um lead por empresa** (`OneToOne`): sim. Se uma empresa "perdida" voltar a ser prospectada, o mesmo lead volta para `novo` e o `HistoricoStatus` guarda o que aconteceu antes.
+- [x] **Status do funil:** mantidos como estão. `reuniao` sem acento por ser código interno; na tela aparece "Reunião".
+- [x] **CNPJ:** só o completo (14 dígitos). Para prospecção importa o estabelecimento; a matriz pode ser identificada pelos 8 primeiros dígitos se necessário.
+- [x] **Modelo `Lead` antigo:** será substituído na #11. Como não há dados reais, a `0001_initial.py` antiga será apagada e as migrações geradas de novo; cada um roda `docker compose down -v` uma vez.
+- [ ] **Campos para a Redrive:** em aberto até a conclusão da #7. Não bloqueia esta issue; ajustes virão em um PR separado.
