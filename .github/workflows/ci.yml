@@ -3,9 +3,9 @@ name: Continuous Integration
 # Aqui dizemos quando o robô deve trabalhar
 on:
   push:
-    branches: [ '**' ]
+    branches: [ 'main', 'develop' ]
   pull_request:
-    branches: [ '**' ]
+    branches: [ 'main', 'develop' ]
 
 jobs:
   test-and-build:
