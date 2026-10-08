@@ -237,22 +237,17 @@ Depois, edite o `.env` e troque os valores `change-me` por senhas próprias (vej
 docker compose up --build
 ```
 
-### 4. Aplicar as migrações do banco
+O backend espera o PostgreSQL ficar pronto e **aplica as migrações automaticamente** antes de iniciar. Não é preciso rodar `migrate` à mão.
+
+### 4. Criar um usuário administrador
 
 Em outro terminal, com os containers rodando:
-
-```bash
-docker compose exec backend python manage.py makemigrations
-docker compose exec backend python manage.py migrate
-```
-
-### 5. Criar um usuário administrador
 
 ```bash
 docker compose exec backend python manage.py createsuperuser
 ```
 
-### 6. Acessar
+### 5. Acessar
 
 | Serviço | Endereço |
 |---|---|
@@ -267,6 +262,15 @@ docker compose exec backend python manage.py createsuperuser
 docker compose down        # para os containers
 docker compose down -v     # para e APAGA o banco de dados (volume)
 ```
+### Alterou um modelo? Crie a migração
+
+Sempre que mudar um arquivo `models.py`, gere a migração e **versione o arquivo gerado** junto com a alteração:
+
+```bash
+docker compose exec backend python manage.py makemigrations
+```
+
+Ela será aplicada automaticamente na próxima vez que o backend subir (ou rode `docker compose restart backend`).
 
 ---
 
@@ -340,8 +344,8 @@ curl -X POST http://localhost:8000/api/leads/search/ \
 
 ### Fase 0 — Ajustes da base
 - [ ] Corrigir o build do frontend (`npm run build`): import de tipo em `SearchForm.tsx` e criação do `src/vite-env.d.ts`
-- [ ] Gerar e versionar as migrações iniciais
-- [ ] Adicionar *healthcheck* do PostgreSQL no `docker-compose.yml`
+- [x] Gerar e versionar as migrações iniciais
+- [x] Adicionar *healthcheck* do PostgreSQL no `docker-compose.yml`
 - [ ] Adicionar autenticação (substituir `AllowAny`)
 
 ### Fase 1 — Modelo de dados
