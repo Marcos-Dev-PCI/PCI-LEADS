@@ -19,10 +19,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    'rest_framework.authtoken', # Linha adicionada
-    "apps.leads",
+    'rest_framework.authtoken',
     "apps.empresas",
-    "apps.leads",
+    "apps.leads"
 ]
 
 MIDDLEWARE = [
