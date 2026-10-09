@@ -417,14 +417,19 @@ As issues foram criadas pelo script [`scripts/criar_issues.py`](scripts/criar_is
 | `feature/<nome>` | Nova funcionalidade (ex.: `feature/importacao-csv`) |
 | `fix/<nome>` | Correção de bug (ex.: `fix/build-frontend`) |
 
-`main` e `develop` são protegidas: não aceitam push direto, e todo merge precisa de um Pull Request com 1 aprovação do outro desenvolvedor.
+`main` e `develop` são protegidas: não aceitam push direto, e todo código entra por um Pull Request aberto, revisado e mergeado pelo Marcos.
 
 ### Fluxo de trabalho
 
-1. Crie uma branch a partir da `develop`;
-2. Faça commits pequenos e descritivos;
-3. Abra um *Pull Request* para a `develop` e peça revisão de outro membro;
-4. Após aprovação, faça o *merge*.
+| Quem | Faz |
+|---|---|
+| **Pedro** | Escreve o código das issues dele, faz os commits e o push na branch da issue |
+| **Marcos** | Abre todos os PRs, revisa e analisa o código, faz os merges e cuida das configurações do repositório |
+
+1. Crie uma branch a partir da `develop` (ex.: `feature/importacao-csv`);
+2. Faça commits pequenos e descritivos e envie com `git push`;
+3. Avise na issue que está pronta para revisão, com o nome da branch;
+4. O Marcos abre o *Pull Request* para a `develop`, revisa e faz o *merge*. Se precisar de ajuste, ele comenta no PR e a correção é feita na mesma branch.
 
 ### Padrão de commits
 
@@ -447,10 +452,10 @@ Projeto interno desenvolvido pela **PCI — Projetos e Consultoria Integrada**.
 
 | Nome | Função |
 |---|---|
-| Marcos André | Desenvolvimento full-stack |
+| Marcos André | Desenvolvimento full-stack, revisão de código, Pull Requests e configuração do repositório |
 | Pedro Esmeraldo | Desenvolvimento full-stack |
 
-O trabalho é dividido **por funcionalidade**: cada um é dono de funcionalidades completas (banco + API + tela) e revisa os PRs do outro. As decisões que afetam o projeto inteiro (modelo de dados e critérios do score) são feitas em dupla.
+O trabalho é dividido **por funcionalidade**: cada um é dono de funcionalidades completas (banco + API + tela). Todo código passa pela revisão do Marcos antes de entrar na `develop`. As decisões que afetam o projeto inteiro (modelo de dados e critérios do score) são feitas em dupla.
 
 ---
 
