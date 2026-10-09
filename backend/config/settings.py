@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework.authtoken', # Linha adicionada
     "apps.leads",
+    "apps.empresas",
+    "apps.leads",
 ]
 
 MIDDLEWARE = [
